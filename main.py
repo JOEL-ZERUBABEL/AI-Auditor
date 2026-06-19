@@ -204,8 +204,8 @@ class Verdict:
         prompt=f'''You are a Senior advisor by checking confidence score and reasoning give your commands
         Investmentreport:{investmentreport} Risk Report:{riskresport}
         return only in JSON
-        {"confidence_score":""},
-        {"reasoning":""}
+        {{"confidence_score":"","reasoning",""}},
+    
         '''
     
         completions=client.chat.completions.create(model='llama-3.3-70b-versatile',messages=[
