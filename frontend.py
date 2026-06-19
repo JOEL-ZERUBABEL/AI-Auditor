@@ -149,37 +149,62 @@ elif boardroom == "Investment Boardroom":
             report,
             risk_report
         )
-        st.subheader("Investment Report")
-        st.code(report, language="json")
-
-        st.subheader("Risk Report")
-        st.code(risk_report, language="json")
-
-        st.subheader("Final Verdict")
-        st.code(final_report, language="json")
-
+        
         try:
-
+            report = report.replace("```json", "").replace("```", "").strip()
+            risk_report = risk_report.replace("```json", "").replace("```", "").strip()
+            final_report = final_report.replace("```json", "").replace("```", "").strip()
             report_data = json.loads(report)
+            risk_data = json.loads(risk_report)
+            final_data = json.loads(final_report)
 
-            st.subheader("Investment Summary")
+            st.subheader("📈 Investment Analysis")
+
+            st.success(report_data["recommendation"])
+
+            st.write("### Pros")
+            st.write(report_data["pros"])
+
+            st.write("### Growth Potential")
+            st.write(report_data["growth_potential"])
+
+            st.write("### Market Outlook")
+            st.write(report_data["market_outlook"])
+
+
+            st.subheader("⚠️ Risk Assessment")
+
+            st.metric("Risk Score", risk_data["risk_score"])
+
+            st.write("### Market Risks")
+            st.write(risk_data["market_risks"])
+
+            st.write("### Economic Risks")
+            st.write(risk_data["economic_risks"])
+
+            st.write("### Volatility")
+            st.write(risk_data["volatility"])
+
+
+            st.subheader("🎯 Final Verdict")
+
+            st.metric("Confidence Score",final_data["confidence_score"])
 
             st.success(
-                report_data["recommendation"]
-            )
+            final_data["reasoning"])
 
-            st.write(
-                "**Growth Potential:**",
-                report_data["growth_potential"]
-            )
+            
 
-            st.write(
-                "**Market Outlook:**",
-                report_data["market_outlook"]
-            )
+        except Exception as e:
+            st.error(f"JSON Error: {e}")
+            st.code(report)
 
-        except:
-            pass
+            st.write("RISK:")
+            st.code(risk_report)
+
+            st.write("FINAL:")
+            st.code(final_report)
+
 
 elif boardroom == "Career Boardroom":
 
