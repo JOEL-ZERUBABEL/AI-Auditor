@@ -64,7 +64,7 @@ if boardroom == "Startup Boardroom":
         ceo = CEO()
         ceo_report = ceo.Ceoo(report)
 
-        st.subheader("📋 Advisor Report")
+        st.subheader("Advisor Report")
         st.info(report)
 
         try:
@@ -72,7 +72,7 @@ if boardroom == "Startup Boardroom":
             import json
 
             ceo_data = json.loads(ceo_report)
-            st.subheader("👨‍💼 CEO Decision Board")
+            st.subheader("CEO Decision Board")
             col1, col2 = st.columns(2)
             with col1:
                 st.metric(
@@ -85,18 +85,18 @@ if boardroom == "Startup Boardroom":
                 ceo_data["rating_percentage"])
 
             st.success( ceo_data["response"])
-            st.subheader("✅ Next Steps")
+            st.subheader("Next Steps")
             timeline = ceo_data["timeline"]
 
             if isinstance(timeline, dict):
                 for phase, activities in timeline.items():
                     st.markdown(f"### {phase}")
                     for activity in activities:
-                        st.write(f"📌 {activity}")
+                        st.write(f"{activity}")
 
             else:
                 for item in timeline:
-                    st.write(f"📌 {item}")
+                    st.write(f"{item}")
 
         except Exception as e:
             st.error(
@@ -158,7 +158,7 @@ elif boardroom == "Investment Boardroom":
             risk_data = json.loads(risk_report)
             final_data = json.loads(final_report)
 
-            st.subheader("📈 Investment Analysis")
+            st.subheader("Investment Analysis")
 
             st.success(report_data["recommendation"])
 
@@ -172,7 +172,7 @@ elif boardroom == "Investment Boardroom":
             st.write(report_data["market_outlook"])
 
 
-            st.subheader("⚠️ Risk Assessment")
+            st.subheader("Risk Assessment")
 
             st.metric("Risk Score", risk_data["risk_score"])
 
@@ -186,7 +186,7 @@ elif boardroom == "Investment Boardroom":
             st.write(risk_data["volatility"])
 
 
-            st.subheader("🎯 Final Verdict")
+            st.subheader("Final Verdict")
 
             st.metric("Confidence Score",final_data["confidence_score"])
 
